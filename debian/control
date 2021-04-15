@@ -1,0 +1,48 @@
+Source: danos-service-flowstat
+Section: contrib/net
+Priority: optional
+Maintainer: Dung Man <dung@fosec.vn>
+Build-Depends: meson,
+               debhelper (>= 9.20160709),
+               dh-exec,
+               dh-python,
+               python3,
+               python3-all,
+               python3-setuptools,
+Standards-Version: 4.3.0
+Homepage:
+
+Package: python3-flowstat
+Section: contrib/python
+Architecture: any
+Depends: ${misc:Depends},
+         ${python3:Depends},
+         python3
+Description: flowstat Python 3 Library.
+ Provides a flowstat library in Python 3.
+
+Package: danos-flowstatd
+Section: contrib/net
+Architecture: any
+Depends: ${misc:Depends},
+         python3,
+         python3-flowstat
+Description: Flowstat service.
+ A systemd service that calculate flow statistics.
+
+Package: danos-service-flowstat-v1-yang
+Section: contrib/net
+Architecture: all
+Depends: ${misc:Depends},
+         ${perl:Depends},
+         danos-flowstatd,
+         libdataplane-flowstat-plugin-proto-support,
+         perl (>= 5.8.8),
+         python3,
+         python3-flowstat,
+         python3-vplaned,
+         vyatta-cfg (>= 0.104),
+         vyatta-op
+Description: config/op yang, templates and scripts for flowstat plugin
+ The Vyatta configuration/operational YANG, templates and scripts for
+ flowstat plugin.

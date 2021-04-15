@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+# You must remove unused comment lines for the released package.
+# export DH_VERBOSE = 1
+export DEB_BUILD_MAINT_OPTIONS=hardening=+format,-fortify,-stackprotector,+relro,+bindnow
+export DEB_CFLAGS_MAINT_APPEND  = -O2
+# export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+export PYBUILD_NAME = flowstat
+export PYBUILD_SYSTEM = distutils
+export PYBUILD_TEST_ARGS_python3=$(CURDIR)/lib/python
+VERSION := $(shell dpkg-parsechangelog | grep '^Version: ' | awk '{print $$2}')
+
+%:
+	dh $@ --builddirectory=build --parallel --with systemd --with python3 --buildsystem=pybuild
+
+%.py: %.py.in
+	sed -e 's/__CHANGELOG_VERSION__/$(VERSION)/' < $< > $@
+
+override_dh_auto_clean: setup.py
+	dh_auto_clean
+
+override_dh_auto_configure: setup.py
+	dh_auto_configure
+
+override_dh_auto_build: setup.py
+	dh_auto_build
+
+override_dh_installinit:
+	dh_installinit -pdanos-flowstatd --no-start --noscripts
+
+override_dh_auto_install:
+	dh_auto_install
