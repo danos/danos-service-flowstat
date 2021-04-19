@@ -1,0 +1,6 @@
+yang/vyatta-interfaces-flowstat-v1.yang usr/share/configd/yang
+yang/vyatta-op-show-flowstat-v1.yang usr/share/configd/yang
+yang/vyatta-service-flowstat-v1.yang usr/share/configd/yang
+scripts/flowstat_show.py opt/vyatta/bin
+scripts/flowstat_update_logrotate opt/vyatta/bin
+scripts/vplane-flowstat.pl opt/vyatta/bin

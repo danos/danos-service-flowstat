@@ -1,0 +1,11 @@
+tmp/
+build/
+.debhelper/
+*.debhelper
+python3-flowstat/
+danos-flowstatd/
+danos-service-flowstat-v1-yang/
+files
+*.log
+*.substvars
+

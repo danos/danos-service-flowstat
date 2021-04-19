@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+#
+# flowstat
+#
+# Copyright (c) 2021 SafePoint <info@safepoint.vn>. All rights reserved.
+# Copyright (c) 2015 by Brocade Communications Systems, Inc.
+# All rights reserved.
+#
+# SPDX-License-Identifier: LGPL-2.1-only
+#
+
+from setuptools import setup
+
+setup(
+    name='flowstat',
+    version='__CHANGELOG_VERSION__',
+    description='Python 3 API for flowstat',
+    author='SafePoint',
+    package_dir={'': 'lib/python'},
+    packages=['flowstat'],
+    install_requires=[
+        'sqlite3>=3.24.0',
+    ]
+)

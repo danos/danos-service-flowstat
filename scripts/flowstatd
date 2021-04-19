@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2021, SafePoint <info@safepoint.vn>.  All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+import logging
+import time
+import traceback
+
+from flowstat import collect_statistics
+
+DB_FILE = '/var/log/flowstat.db'
+LOG_FILE = '/var/log/flowstat.log'
+
+
+def run_collect():
+    while True:
+        try:
+            collect_statistics(DB_FILE, LOG_FILE)
+        except Exception as e:
+            traceback.print_exc()
+        time.sleep(10)
+
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser('flowstatd')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Show debug log')
+    args = parser.parse_args()
+
+    # setup logging
+    log_fmt = '%(message)s'
+    log_lv = logging.DEBUG if args.verbose else logging.INFO
+    logging.basicConfig(format=log_fmt, level=log_lv)
+
+    run_collect()
